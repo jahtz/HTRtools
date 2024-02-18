@@ -1,7 +1,7 @@
 import click
 
 from modules.pagestats import regionstats_cli
-#from modules.pagesearch import pagesearch_cli
+from modules.pagesearch import pagesearch_cli
 
 
 @click.group()
@@ -24,5 +24,4 @@ def cli(**kwargs):
 cli.add_command(regionstats_cli)
 
 # pagesearch_module
-#cli.add_command(pagesearch_cli)
-
+cli.add_command(pagesearch_cli)

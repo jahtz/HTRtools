@@ -101,7 +101,7 @@ class PageSearch:
         if not equiv:
             return ''
         for index_line in equiv:
-            if not 'index' in index_line:
+            if 'index' not in index_line:
                 line = index_line.find('Unicode')
                 if line is None:
                     return ''

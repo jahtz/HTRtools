@@ -1,7 +1,6 @@
 import click
 
-#from modules.htr_parser.ods_to_csv import ods_to_csv
-#from modules.pagestats import regionstats_cli
+from modules.pagestats import regionstats_cli
 #from modules.pagesearch import pagesearch_cli
 
 
@@ -22,7 +21,7 @@ def cli(**kwargs):
 
 
 # pagestats module
-#cli.add_command(regionstats_cli)
+cli.add_command(regionstats_cli)
 
 # pagesearch_module
 #cli.add_command(pagesearch_cli)

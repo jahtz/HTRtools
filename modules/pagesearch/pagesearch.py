@@ -77,7 +77,8 @@ class PageSearch:
                                  self.files))  # remove excluded folders
         self.files.sort()
 
-    def __parse_search(self, fp: Path) -> list[str]:
+    @staticmethod
+    def __parse_search(fp: Path) -> list[str]:
         """
         parse search file and returns list of char sequences
 
@@ -88,7 +89,8 @@ class PageSearch:
             data = f.readlines()
         return [x.strip() for x in data if x.strip() != '' and not x.startswith('#')]
 
-    def __get_line_text(self, text_line: bs4.PageElement) -> str:
+    @staticmethod
+    def __get_line_text(text_line: bs4.PageElement) -> str:
         """
         extracts text from a TextLine elements, returns empty string if nothing found
 
@@ -112,8 +114,8 @@ class PageSearch:
                     return line.text
         return ''
 
-
-    def __print_results(self, results: dict) -> None:
+    @staticmethod
+    def __print_results(results: dict) -> None:
         """
         Prints results of search in readable format
 
@@ -139,7 +141,8 @@ class PageSearch:
             stream.writerows(content)
         return fp
 
-    def __fix_xml(self, xml_path: Path, filename: str) -> None:
+    @staticmethod
+    def __fix_xml(xml_path: Path, filename: str) -> None:
         """
         Tries to change imageFilename in pageXML file
 

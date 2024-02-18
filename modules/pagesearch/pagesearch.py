@@ -121,9 +121,9 @@ class PageSearch:
         :return: None
         """
         for key, val in results.items():
-            print(key)
+            click.echo(key)
             for hits in val:
-                print(f'\tFound {hits["search"]} in line {hits["line"]}: "{hits["text"]}"')
+                click.echo(f'\tFound {hits["search"]} in line {hits["line"]}: "{hits["text"]}"')
 
     def __write_csv(self, content: list[list]) -> Path:
         """
@@ -156,7 +156,7 @@ class PageSearch:
             with open(xml_path, "w", encoding='utf-8') as outfile:
                 outfile.write(etree.tostring(root, encoding="unicode", pretty_print=True))
         except Exception as e:
-            print(e)
+            click.echo(e, err=True)
 
     def __copy_results(self, results: dict) -> Path:
         """
@@ -183,7 +183,7 @@ class PageSearch:
                     if self.__copy_config[ext_index][0] == self.__xml_config and self.__xml_update:
                         self.__fix_xml(new_path, f'{fc:05d}{self.__xml_update}')
                 else:
-                    print('FileNotFound (skip):', orig_path.as_posix(), '>', new_path.as_posix())
+                    click.echo(f'FileNotFound (skip): {orig_path.as_posix()} > {new_path.as_posix()}')
             # prepare data for csv file
             for hit in hits:
                 csv_content.append([
@@ -209,11 +209,11 @@ class PageSearch:
         """
         search = self.__parse_search(search_fp)
         if not search:
-            print('Search empty!')
+            click.echo('Search empty!')
             return
 
         if not console and not self.__output_dir:
-            print('No output directory set!')
+            click.echo('No output directory set!')
             return
 
         result: dict = {}  # key: file path, value: list of found data
@@ -246,9 +246,9 @@ class PageSearch:
                 self.__print_results(result)
             else:
                 csv_file = self.__copy_results(result)
-                print(f'Done! ({csv_file})')
+                click.echo(f'Done! ({csv_file})')
         else:
-            print('Nothing found!')
+            click.echo('Nothing found!')
             return
 
 

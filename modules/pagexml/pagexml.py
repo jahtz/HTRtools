@@ -1,3 +1,26 @@
+from dataclasses import dataclass
+
+
+@dataclass
+class Coordinate:
+    x: int
+    y: int
+
+    """
+    0,0 -- x,0
+     |      |
+     |  A4  |
+     |      |
+    0,y -- x,y
+    """
+
+    def __init__(self, xy: str):
+        self.x, self.y = map(int, xy.split(','))
+
+    def __str__(self):
+        return f'{self.x},{self.y}'
+
+
 class TextRegion:
     def __init__(self, _id: str, _type: str) -> None:
         self.__id: str = _id
@@ -19,5 +42,3 @@ class TextRegion:
     def set_lines(self, lines: int) -> None:
         self.__lines = lines
 
-    def increment_lines(self) -> None:
-        self.__lines += 1

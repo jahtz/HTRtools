@@ -4,7 +4,7 @@ from pathlib import Path
 import bs4
 import click
 
-from .textregion import TextRegion
+from .pagexml import TextRegion
 
 
 class RegionStats:
@@ -39,8 +39,8 @@ class RegionStats:
         else:
             self.stats_to_console(stats)
 
-    @classmethod
-    def stats_to_console(cls, stats: dict):
+    @staticmethod
+    def stats_to_console(stats: dict):
         region_types = set()
         for page in stats:
             for region in stats[page]:
@@ -61,8 +61,8 @@ class RegionStats:
             for i in range(1, len(content)):
                 click.echo(f'\t{header[i]}: {content[i]}')
 
-    @classmethod
-    def stats_to_csv(cls, stats: dict, out_fp: Path):
+    @staticmethod
+    def stats_to_csv(stats: dict, out_fp: Path):
         region_types = set()
         for page in stats:
             for region in stats[page]:

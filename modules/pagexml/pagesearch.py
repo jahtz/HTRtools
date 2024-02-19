@@ -10,7 +10,7 @@ import click
 from lxml import etree
 from pathlib import Path
 
-DEFAULT_CONFIG = Path(__file__).parent.parent.parent.joinpath('config', 'page_search.cfg')
+DEFAULT_CONFIG = Path(__file__).parent.parent.parent.joinpath('config', 'pagesearch.cfg')
 CSV_HEADER = ['search', 'out_file', 'line', 'text', 'original_file']
 CSV_FILE = 'results.csv'
 
@@ -258,7 +258,7 @@ class PageSearch:
 @click.command('pagesearch', short_help='Search for characters in set of PageXML files.')
 @click.help_option('--help', '-h')
 @click.argument(
-    'input_files',
+    'input_dir',
     type=click.Path(exists=True, dir_okay=True, file_okay=False),
     required=True,
 )
@@ -289,24 +289,24 @@ class PageSearch:
 )
 @click.option(
     '--config',
-    help='Include custom config.cfg file.',
+    help='Use custom config.cfg file.',
     type=click.Path(exists=True, dir_okay=False, file_okay=True),
     default=DEFAULT_CONFIG,
     show_default=True,
     required=False
 )
-def pagesearch_cli(input_files: str, search_file: str, console: bool, recursive: bool, output: str, config: str):
+def pagesearch_cli(input_dir: str, search_file: str, console: bool, recursive: bool, output: str, config: str):
     """
     Search for characters in set of PageXML files.
 
-    Creates a directory with content based on rules specified in './config/page_search.cfg'.
+    Creates a directory with content based on rules specified in './config/pagesearch.cfg'.
 
-    INPUT_FILES should be a directory containing PageXML files and matching images.
+    INPUT_DIR should be a directory containing PageXML files and matching images.
 
     SEARCH_FILE examples can be found in './examples/' folder.
     """
     PageSearch(
-        input_dir=Path(input_files).absolute(),
+        input_dir=Path(input_dir).absolute(),
         output_dir=None if output is None else Path(output).absolute(),
         recursive=recursive,
         config=Path(config).absolute()

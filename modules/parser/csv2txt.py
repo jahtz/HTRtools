@@ -45,7 +45,14 @@ def csv2txt(csv_fp: Path, txt_fp: Path, column: int, skip: bool = False) -> None
     type=bool,
     default=False
 )
-def csv2txt_cli(input_csv: Path, output_txt: Path, column: int, skip: bool) -> None:
+def csv2txt_cli(input_csv: str, output_txt: str, column: int, skip: bool) -> None:
+    """
+    Extracts a column from a .csv file into a .txt file.
+
+    OUTPUT_TXT of format '/path/to/file.txt'.
+
+    Made for pagesearch script.
+    """
     click.echo('Extracting content...', nl=False)
     csv2txt(Path(input_csv), Path(output_txt), column, skip)
     click.echo(' Done')

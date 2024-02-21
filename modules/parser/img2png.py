@@ -35,7 +35,7 @@ def img2png(
 @click.help_option('--help', '-h')
 @click.argument(
     'input_dir',
-    type=click.Path(exists=True, dir_okay=True, file_okay=True),
+    type=click.Path(exists=True, dir_okay=True, file_okay=False),
     required=True
 )
 @click.argument(

@@ -2,6 +2,7 @@ import click
 
 from modules.pagexml import regionstats_cli, pagesearch_cli, pagefix_cli
 from modules.parser import csv2txt_cli, ods2json_cli, img2png_cli, pdf2png_cli
+from modules.manipulation import imageresize_cli
 
 
 @click.group()
@@ -32,7 +33,7 @@ cli.add_command(img2png_cli)
 cli.add_command(pdf2png_cli)
 
 # manipulation module
-
+cli.add_command(imageresize_cli)
 
 if __name__ == '__main__':
     cli()

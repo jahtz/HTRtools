@@ -1,0 +1,1 @@
+from .imageresize import imageresize_cli

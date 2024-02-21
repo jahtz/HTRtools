@@ -18,7 +18,7 @@ def csv2txt(csv_fp: Path, txt_fp: Path, column: int, skip: bool = False) -> None
         f.write('\n'.join(cells))
 
 
-@click.command('csv2txt', short_help='Extracts a column from a .csv file into a .txt file.')
+@click.command('csv2txt', short_help='Extracts a column from a CSV file into a TXT file.')
 @click.help_option('--help', '-h')
 @click.argument(
     'input_csv',

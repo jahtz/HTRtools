@@ -29,7 +29,7 @@ def convert_2d_values_to_string(l: list) -> None:
             l[i][j] = str(l[i][j]).strip()
 
 
-@click.command('ods2json', short_help='Extracts mapping data from .ods file to PAGETools compatible json format.')
+@click.command('ods2json', short_help='Extracts mapping data from ODS file to PAGETools compatible JSON format.')
 @click.help_option('--help', '-h')
 @click.argument(
     'input_ods',

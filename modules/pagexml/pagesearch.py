@@ -3,12 +3,11 @@ import os
 import bs4
 import shutil
 import configparser
-
+from pathlib import Path
 from glob import glob
 
 import click
 from lxml import etree
-from pathlib import Path
 
 DEFAULT_CONFIG = Path(__file__).parent.parent.parent.joinpath('config', 'pagesearch.cfg')
 CSV_HEADER = ['search', 'out_file', 'line', 'text', 'original_file']

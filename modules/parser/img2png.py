@@ -16,7 +16,7 @@ def img2png(
     output_dir.mkdir(exist_ok=True)
     images = list(input_dir.glob(f'{"**/" if recursive else ""}*{input_suffix}'))
     images.sort()
-    with click.progressbar(images, label='Convert images...') as imgs:
+    with click.progressbar(images, label='Convert images', show_pos=True) as imgs:
         for i, image in enumerate(imgs):
             if number:
                 out_path = output_dir.joinpath(f'{(i +1):04d}{output_suffix}.png')
@@ -60,8 +60,8 @@ def img2png(
     required=False
 )
 @click.option(
-    '--height',
-    help='Set height of output images. Defaults to input height.',
+    '-s', '--size',
+    help='Set height of output images in pixels. Defaults to input height.',
     type=int,
     required=False
 )
@@ -84,7 +84,7 @@ def img2png_cli(
         output_dir: str,
         input_suffix: str,
         output_suffix: str,
-        height: int | None,
+        size: int | None,
         recursive: bool,
         number: bool
 ) -> None:
@@ -96,7 +96,7 @@ def img2png_cli(
         output_dir=Path(output_dir),
         input_suffix=input_suffix if input_suffix.startswith(".") else f".{input_suffix}",
         output_suffix=output_suffix if output_suffix.startswith(".") or output_suffix == '' else f".{output_suffix}",
-        height=height,
+        height=size,
         recursive=recursive,
         number=number
     )

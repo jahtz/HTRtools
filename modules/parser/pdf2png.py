@@ -6,7 +6,7 @@ from PIL import Image
 
 
 def pdf2png(input_pdf: Path, output_dir: Path, output_suffix: str, height: int | None, dpi: int) -> None:
-    output_dir.mkdir(exist_ok=True)
+    output_dir.mkdir(exist_ok=True, parents=True)
     fs = fitz.open(input_pdf)
     with click.progressbar(fs, label='Convert page', show_pos=True) as pages:
         for i, page in enumerate(pages):

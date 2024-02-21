@@ -13,7 +13,7 @@ def img2png(
         recursive: bool,
         number: bool
 ) -> None:
-    output_dir.mkdir(exist_ok=True)
+    output_dir.mkdir(exist_ok=True, parents=True)
     images = list(input_dir.glob(f'{"**/" if recursive else ""}*{input_suffix}'))
     images.sort()
     with click.progressbar(images, label='Convert images', show_pos=True) as imgs:

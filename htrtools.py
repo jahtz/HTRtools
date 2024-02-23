@@ -8,7 +8,7 @@ from modules.manipulation import imageresize_cli, suffixedit_cli
 @click.group()
 @click.help_option("--help", "-h")
 @click.version_option(
-    "0.2",
+    "1.0",
     "-v", "--version",
     prog_name="HTRtools",
     message="%(prog)s v%(version)s - Developed at Centre for Philology and Digitality (ZPD), University of Würzburg"

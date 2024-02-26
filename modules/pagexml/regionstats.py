@@ -15,6 +15,7 @@ class RegionStats:
             self.files = [fp]
         else:
             self.files = list(Path(fp).glob('*.xml'))
+            self.files.sort()
 
     def run(self, out_fp: Path | None):
         stats = {}

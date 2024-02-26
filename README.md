@@ -190,7 +190,25 @@ Options:
                             OUTPUT argument set.
   -s, --size INTEGER        Set height of output images in pixels.  [required]
 ```
+#### mapping
+```
+Usage: mapping [OPTIONS] DIRECTORY [MAPPING]
 
+  Rename files either numbered and create mapping file or use mapping file to
+  restore original names.
+
+  MAPPING file defaults to mapping.txt, only used in ORIGINAL mode.
+
+Options:
+  -h, --help                      Show this message and exit.
+  -m, --mode [numbered|original]  numbered: rename files with numbers,
+                                  original: rename files with original names.
+                                  [required]
+  -r, --regex TEXT                Input filename regular expression (example:
+                                  *.orig.png).  [default: *]
+  -f, --file                      Outputs only mapping.txt file without
+                                  rename.
+```
 #### suffixedit
 ```
 Usage: HTRtools suffixedit [OPTIONS] DIRECTORY OLD_SUFFIX NEW_SUFFIX
@@ -199,4 +217,15 @@ Options:
   -h, --help            Show this message and exit.
   -b, --blacklist TEXT  Blacklist suffixes, multiple items are allowed.
   -r, --recursive       Walk through subdirectories recursively.
+```
+#### filenamecut
+```
+Usage: filenamecut [OPTIONS] DIRECTORY CUT_LENGTH
+
+  Cuts first CUT_LENGTH characters from filenames.
+
+Options:
+  -h, --help        Show this message and exit.
+  -r, --regex TEXT  Input filename regular expression (example: *.orig.png).
+                    [default: *]
 ```

@@ -1,1 +1,0 @@
-from .pagexml import Coordinate, TextRegion

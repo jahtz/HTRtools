@@ -1,4 +1,0 @@
-# Search without #, multiple strings seperated by newline
-DE
-AbcDefG
-A

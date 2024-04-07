@@ -1,0 +1,82 @@
+{
+    "text": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "paragraph"
+        }
+    },
+    "paragraph": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "paragraph"
+        }
+    },
+    "section": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "other"
+        }
+    },
+    "caption": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "caption"
+        }
+    },
+    "equation": {
+        "type": "MathsRegion",
+        "attributes": {}
+    },
+    "figure": {
+        "type": "GraphicRegion",
+        "attributes": {
+            "type": "other"
+        }
+    },
+    "date": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "other"
+        }
+    },
+    "abstract": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "other"
+        }
+    },
+    "author": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "author"
+        }
+    },
+    "title": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "heading"
+        }
+    },
+    "table": {
+        "type": "TableRegion",
+        "attributes": {}
+    },
+    "list": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "list-label"
+        }
+    },
+    "reference": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "marginalia"
+        }
+    },
+    "footer": {
+        "type": "TextRegion",
+        "attributes": {
+            "type": "footer"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+from .parser.coco2page import coco2page_cli

@@ -21,12 +21,12 @@ def csv2txt(csv_fp: Path, txt_fp: Path, column: int, skip: bool = False) -> None
 @click.command('csv2txt', short_help='Extracts a column from a CSV file into a TXT file.')
 @click.help_option('--help', '-h')
 @click.argument(
-    'input_csv',
+    'csv_in',
     type=click.Path(exists=True, dir_okay=False, file_okay=True),
     required=True
 )
 @click.argument(
-    'output_txt',
+    'txt_out',
     type=click.Path(exists=False, dir_okay=False, file_okay=True),
     required=True
 )
@@ -45,15 +45,15 @@ def csv2txt(csv_fp: Path, txt_fp: Path, column: int, skip: bool = False) -> None
     type=bool,
     default=False
 )
-def csv2txt_cli(input_csv: str, output_txt: str, column: int, skip: bool) -> None:
+def csv2txt_cli(csv_in: str, txt_out: str, column: int, skip: bool) -> None:
     """
     Extracts a column from a .csv file into a .txt file.
 
-    OUTPUT_TXT of format '/path/to/file.txt'.
+    TXT_OUT of format '/path/to/file.txt'.
 
     Made for pagesearch script.
     """
     click.echo('Extracting content...', nl=False)
-    csv2txt(Path(input_csv), Path(output_txt), column, skip)
+    csv2txt(Path(csv_in), Path(txt_out), column, skip)
     click.echo(' Done')
     

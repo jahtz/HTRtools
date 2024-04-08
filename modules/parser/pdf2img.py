@@ -18,7 +18,7 @@ def pdf2img(pdf: Path, out_dir: Path, output: str, height: int | None, dpi: int)
     out_dir.mkdir(exist_ok=True, parents=True)
 
     fs = fitz.open(pdf)
-    with click.progressbar(fs, label='Extract page', show_pos=True, show_eta=True, show_percent=True) as pages:
+    with click.progressbar(fs, label='Convert images', show_pos=True, show_eta=True, show_percent=True) as pages:
         for i, page in enumerate(pages):
             pixmap = page.get_pixmap(dpi=dpi)
             outfile = out_dir.joinpath(f'{(i + 1):04d}{output}')

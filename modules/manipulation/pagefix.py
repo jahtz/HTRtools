@@ -87,12 +87,13 @@ class PageFix:
             for region in get_page_regions(page):
                 min_y = 0  # min y coordinate of previous text line
                 for element in get_region_elements(region):
-                    coords = get_coords(element)
-                    for point in coords:
-                        if point.y <= min_y:
-                            point.y = min_y + 1
-                    min_y = min([p.y for p in coords])
-                    get_coords_element(element)['points'] = coords.to_page_coords()
+                    if (coords_element := get_coords_element(element)) is not None:
+                        coords = get_coords(element)
+                        for point in coords:
+                            if point.y <= min_y:
+                                point.y = min_y + 1
+                        min_y = min([p.y for p in coords])
+                        coords_element['points'] = coords.to_page_coords()
 
     def save(self):
         """
@@ -104,7 +105,7 @@ class PageFix:
 @click.command('pagefix', short_help='Fix invalid PageXML documents')
 @click.help_option('--help', '-h')
 @click.argument(
-    'input',
+    'xmls',
     type=click.Path(exists=True, dir_okay=True, file_okay=True),
     required=True
 )
@@ -135,7 +136,7 @@ class PageFix:
     default=False
 )
 @click.option(
-    '-t', '--type',
+    '-t', '--type', '_type',
     help='Adding or fixing type attribute to Page element.',
     is_flag=True,
     type=click.BOOL,
@@ -162,7 +163,7 @@ class PageFix:
     type=click.BOOL,
     default=False
 )
-def pagefix_cli(_input: str, out_dir: str | None, filename: bool, regions: bool, order: bool, _type: bool,
+def pagefix_cli(xmls: str, out_dir: str | None, filename: bool, regions: bool, order: bool, _type: bool,
                 coords: bool, lines: bool, spikes: bool):
     """
     Fix invalid PageXML documents.
@@ -171,7 +172,7 @@ def pagefix_cli(_input: str, out_dir: str | None, filename: bool, regions: bool,
 
     Recommended options: -cfot
     """
-    in_fp = Path(_input)
+    in_fp = Path(xmls)
     if in_fp.is_dir():
         files = in_fp.glob('*.xml')
     else:

@@ -65,3 +65,10 @@ def img2img_cli(images: str, out_dir: str, _input: str, output: str, size: int |
     """
     Converts image file with INPUT format to OUTPUT format.
     """
+    img2img(
+        images=Path(images),
+        out_dir=Path(out_dir),
+        in_suffix=_input if _input.startswith('.') else f'.{_input}',
+        out_suffix=output if output.startswith('.') else f'.{output}',
+        height=size
+    )

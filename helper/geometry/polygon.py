@@ -16,6 +16,20 @@ class Polygon:
     def __repr__(self):
         return ' '.join(map(str, self._points))
 
+    def __iter__(self) -> Self:
+        """ Iterate through the list of points """
+        self.__n = 0
+        return self
+
+    def __next__(self) -> Point:
+        """ Iterate through the list of points """
+        if self.__n < len(self._points):
+            point = self._points[self.__n]
+            self.__n += 1
+            return point
+        else:
+            raise StopIteration
+
     @classmethod
     def from_page_coords(cls, coords: str) -> Self:
         """ Creates Polygon object from PageXML coords string """

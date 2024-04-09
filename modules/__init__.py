@@ -4,3 +4,4 @@ from .parser.pdf2img import pdf2img_cli
 from .parser.csv2txt import csv2txt_cli
 
 from .manipulation.pagefix import pagefix_cli
+from .manipulation.rename import rename_cli

@@ -1,6 +1,7 @@
 import click
 
-from modules import coco2page_cli, img2img_cli, pdf2img_cli, csv2txt_cli, pagefix_cli
+from modules import (coco2page_cli, img2img_cli, pdf2img_cli, csv2txt_cli,
+                     pagefix_cli, rename_cli)
 
 
 @click.group()
@@ -22,7 +23,7 @@ def cli(**kwargs):
 #cli.add_command(pagesearch_cli)
 
 # manipulation module
-#cli.add_command(imgresize_cli)
+cli.add_command(rename_cli)
 cli.add_command(pagefix_cli)
 
 # parser module

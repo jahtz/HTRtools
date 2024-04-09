@@ -81,7 +81,7 @@ def coco2page(coco_fp: Path, out_dir: Path, mapping: dict, creator: str, dots: b
             pxml.to_xml(out_dir.joinpath('.'.join(file['file'].split('.')[:-1]) + '.xml'))
 
 
-@click.command('coco2page', short_help='Converts COCO annotations to PageXML files')
+@click.command('coco2page', short_help='Converts COCO annotations to PageXML files.')
 @click.help_option('-h', '--help')
 @click.argument(
     'coco_file',
@@ -90,13 +90,13 @@ def coco2page(coco_fp: Path, out_dir: Path, mapping: dict, creator: str, dots: b
 )
 @click.option(
     '-o', '--output',
-    help='Output directory for generated PageXML files. Writes to the same directory as the COCO file if not set',
+    help='Output directory for generated PageXML files. Writes to the same directory as the COCO file if not set.',
     type=click.Path(exists=False, dir_okay=True, file_okay=False),
     required=False,
 )
 @click.option(
     '-m', '--mapping',
-    help='JSON file containing mapping from COCO categories to PageXML regions and elements',
+    help='JSON file containing mapping from COCO categories to PageXML regions and elements.',
     type=click.Path(exists=True, dir_okay=False, file_okay=True),
     required=False,
     default=DEFAULT_MAPPING,
@@ -104,14 +104,14 @@ def coco2page(coco_fp: Path, out_dir: Path, mapping: dict, creator: str, dots: b
 )
 @click.option(
     '-c', '--creator',
-    help='Creator of the generated PageXML files',
+    help='Creator of the generated PageXML files.',
     type=click.STRING,
     required=False,
     default='ZPD Wuerzburg'
 )
 @click.option(
     '-d', '--dots',
-    help='Remove dots in PageXML file names and all filename attributes. Replace them with underscores',
+    help='Remove dots in PageXML file names and all filename attributes. Replace them with underscores.',
     type=click.BOOL,
     is_flag=True,
     required=False,
@@ -119,7 +119,7 @@ def coco2page(coco_fp: Path, out_dir: Path, mapping: dict, creator: str, dots: b
 )
 def coco2page_cli(coco_file: str, output: str | None, mapping: str | None, creator: str | None, dots: bool):
     """
-    Converts COCO annotations to PageXML files
+    Converts COCO annotations to PageXML files.
     """
     coco_fp = Path(coco_file)
     out_dir = coco_fp.parent if output is None else Path(output)

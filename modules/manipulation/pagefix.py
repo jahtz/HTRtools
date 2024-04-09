@@ -102,7 +102,7 @@ class PageFix:
         self._pxml.to_xml(self._out_fp)
 
 
-@click.command('pagefix', short_help='Fix invalid PageXML documents')
+@click.command('pagefix', short_help='Fix invalid PageXML documents.')
 @click.help_option('--help', '-h')
 @click.argument(
     'xmls',

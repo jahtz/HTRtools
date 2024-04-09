@@ -64,18 +64,18 @@ def mapping(files: Path, m: Path):
 @click.option(
     '-e', '--enumerate', 'option',
     help='Enumerate files and create mapping file. '
-         'First argument: mapping file output path. (default=FILES).',
+         'First argument: mapping file output path (default=FILES).',
     flag_value='enumerate'
 )
 @click.option(
     '-m', '--mapping', 'option',
     help='Rename files according to mapping file. '
-         'First argument: mapping file path. (required)',
+         'First argument: mapping file path (required).',
     flag_value='mapping'
 )
 @click.option(
     '-r', '--regex',
-    help='Glob Regex for file selection',
+    help='Glob Regex for file selection.',
     type=click.STRING,
     default='*',
     show_default=True

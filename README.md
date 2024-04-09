@@ -1,231 +1,75 @@
 # Documentation
-## Table of Contents
-- [Setup](https://github.com/Jatzelberger/HTRtools#setup)
-- [Usage](https://github.com/Jatzelberger/HTRtools#usage)
-- [Tools](https://github.com/Jatzelberger/HTRtools#tools)
-   - [PageXML](https://github.com/Jatzelberger/HTRtools#pagexml)
-      - [pagefix](https://github.com/Jatzelberger/HTRtools#pagefix)
-      - [pagesearch](https://github.com/Jatzelberger/HTRtools#pagesearch)
-      - [regionstats](https://github.com/Jatzelberger/HTRtools#regionstats)
-    - [Parser](https://github.com/Jatzelberger/HTRtools#parser)
-      - [csv2txt](https://github.com/Jatzelberger/HTRtools#csv2txt)
-      - [img2png](https://github.com/Jatzelberger/HTRtools#img2png)
-      - [ods2json](https://github.com/Jatzelberger/HTRtools#ods2json)
-      - [pdf2png](https://github.com/Jatzelberger/HTRtools#pdf2png)
-    - [Manipulation](https://github.com/Jatzelberger/HTRtools#manipulation)
-      - [imageresize](https://github.com/Jatzelberger/HTRtools#imageresize)
-      - [suffixedit](https://github.com/Jatzelberger/HTRtools#suffixedit)
-
-## Setup
-Tested with Python 3.12.1
-### Download
-```shell
-git pull https://github.com/Jatzelberger/HTRtools
-```
-### Install Dependencies
-```shell
+## Installation
+```bash
+git pull https://github.com/jatzelberger/htrtools.git
 pip3 install -r HTRtools/requirements.txt
-```
-Content:
-```
-beautifulsoup4~=4.12.2
-click~=8.1.7
-lxml~=5.1.0
-odspy~=0.1
-pandas~=2.1.3
-pillow~=10.2.0
-PyMuPDF~=1.23.6
-PyMuPDFb~=1.23.6
 ```
 
 ## Usage
-```shell
-python3 HTRtools [OPTIONS] COMMAND [ARGS]...
-```
-```shell
-python3 HTRtools -h
-```
 
-## Tools
-### PageXML
-#### pagefix
-```
-Usage: HTRtools pagefix [OPTIONS] INPUT_DIR [OUTPUT_DIR]
-
-  Fix invalid PageXML documents.
-
-  If OUTPUT_DIR is not set, script will overwrite old xml files.
-
-  Recommended options: -cfrt
-
-Options:
-  -h, --help             Show this message and exit.
-  -f, --image_filename   Changes imageFilename attribute of Page element from
-                         absolute to relative.
-  -m, --merge_regions    Merges TextRegion elements with same coordinates.
-  -r, --reading_order    Adding or updating ReadingOrder element.
-  -t, --region_type      Adding or fixing type attribute to Page element.
-  -c, --negative_coords  Sets all negative coordinates of TextLine elements to
-                         0.
-  -l, --line_order       Fixing TextLine element order by their y coordinates.
+### pagefix
+Fix PageXML files. Specifically made for the output of [Kraken](https://github.com/mittagessen/kraken), but should work in other cases as well.<br>
+Possible fixes:
+- filename: change the imageFilename attribute of the PAGE file from absolute path to filename.
+- regions: merge regions with the coordinates.
+- order: add a reading order, sorted by their occurrence in the PAGE file.
+- type: add of fix missing type attribute of regions.
+- coords: replaces negative coordinates with 0.
+- lines: Sorts TextLine elements by their y-coordinates.
+- spikes: Remove elements mask spikes,
+```bash
+python3 HTRtools pagefix -h
 ```
 
-#### pagesearch
-```
-Usage: HTRtools pagesearch [OPTIONS] INPUT_DIR SEARCH_FILE
-
-  Search for characters in set of PageXML files.
-
-  Creates a directory with content based on rules specified in
-  './config/pagesearch.cfg'.
-
-  INPUT_DIR should be a directory containing PageXML files and matching
-  images.
-
-  SEARCH_FILE examples can be found in './examples/' folder.
-
-Options:
-  -h, --help              Show this message and exit.
-  -c, --console           Prints output to console (without file copy).
-  -r, --recursive         Recursive search in input directory.
-  -o, --output DIRECTORY  Target directory for copied images and output
-                          results.csv file. Ignored if -c/--console is set.
-  --config FILE           Use custom config.cfg file.  [default: /home/janik/S
-                          eafile/zpd/github/HTRtools/config/pagesearch.cfg]
-```
-#### regionstats
-```
-Usage: HTRtools regionstats [OPTIONS] XML_FILES [OUTPUT_DIRECTORY]
-
-  Outputs stats of one or multiple PageXML files.
-
-  XML_FILES can either be a directory containing multiple .xml files or a
-  single .xml file.
-
-  Creates a stats.csv file in OUTPUT_DIRECTORY or prints stats to console if
-  OUTPUT_DIRECTORY is not specified.
-
-Options:
-  -h, --help  Show this message and exit.
-```
-### Parser
-#### csv2txt
-```
-Usage: HTRtools csv2txt [OPTIONS] INPUT_CSV OUTPUT_TXT
-
-  Extracts a column from a .csv file into a .txt file.
-
-  OUTPUT_TXT of format '/path/to/file.txt'.
-
-  Made for pagesearch script.
-
-Options:
-  -h, --help            Show this message and exit.
-  -c, --column INTEGER  Column to extract.  [default: 0]
-  -s, --skip            Skip empty cells, else insert blank line.
+### rename
+Rename files in a directory by some rules.
+- replace: Replace or remove substrings of filenames.
+- dots: Remove dots from filenames, keep defined number of suffixes.
+- enumerate: Replaces the filename with an enumeration. Creates mapping.txt file.
+- mapping: Rename files according to a mapping.txt file.
+```bash
+python3 HTRtools rename -h
 ```
 
-#### img2png
-```
-Usage: HTRtools img2png [OPTIONS] INPUT_DIR OUTPUT_DIR
-
-  Converts any image file formats to PNG file.
-
-Options:
-  -h, --help                Show this message and exit.
-  -i, --input_suffix TEXT   Input file suffix.  [default: .jpg]
-  -o, --output_suffix TEXT  Output file suffix between filename and ".png".
-  -s, --size INTEGER        Set height of output images in pixels. Defaults to
-                            input height.
-  -r, --recursive           Walks INPUT_DIR recursively.
-  -n, --number              number filenames.
-
+### coco2page
+Converts COCO annotations to PAGE XML files. Custom mapping can be set in a JSON file.
+```bash
+python3 HTRtools coco2page -h
 ```
 
-#### ods2json
-```
-Usage: HTRtools ods2json [OPTIONS] INPUT_ODS OUTPUT_JSON
-
-  Extracts mapping data from .ods file to PAGETools compatible json format.
-
-  PAGETools: https://github.com/uniwue-zpd/PAGETools
-
-  OUTPUT_TXT of format '/path/to/file.json'.
-
-Options:
-  -h, --help              Show this message and exit.
-  -p, --disable_prettify  Disable pretty printing.
-  -i, --indent INTEGER    Pretty printing indentation. Ignored if -p is set.
-                          [default: 4]
+### csv2txt
+Converts a column of a CSV file to a text file. 
+```bash
+python3 HTRtools csv2txt -h
 ```
 
-#### pdf2png
-```
-Usage: HTRtools pdf2png [OPTIONS] INPUT_PDF OUTPUT_DIR
-
-  Converts PDF file to PNG images, numerated by page number.
-
-Options:
-  -h, --help                Show this message and exit.
-  -o, --output_suffix TEXT  Output file suffix between filename and ".png".
-  -s, --size INTEGER        Set height of output images in pixels. Defaults to
-                            original height.
-  -d, --dpi INTEGER         DPI for PDF scanning.  [default: 300]
+### img2img
+Converts images to a different format and/or resizes the file.
+```bash
+python3 HTRtools img2img -h
 ```
 
-### Manipulation
-#### imageresize
+### pdf2img
+Converts a PDF file to a set of images. Filenames are generated by the page number.
+```bash
+python3 HTRtools pdf2img -h
 ```
-Usage: HTRtools imageresize [OPTIONS] INPUT_DIR [OUTPUT_DIR]
 
-  Resizes images.
-
-  Overwrites original images if OUTPUT_DIR is not set.
-
-Options:
-  -h, --help                Show this message and exit.
-  -i, --input_regex TEXT    Input filename regular expression (example:
-                            *.orig.png).  [default: *]
-  -o, --output_suffix TEXT  Replaces all suffixes after first dot. Only with
-                            OUTPUT argument set.
-  -s, --size INTEGER        Set height of output images in pixels.  [required]
+### pagesearch (old)
+Search PageXML files for a set of strings. Outputs a CSV file with the results.<br>
+Optional: Copy matched image and xml files to an output directory.
+```bash
+python3 HTRtools pagesearch -h
 ```
-#### mapping
-```
-Usage: mapping [OPTIONS] DIRECTORY [MAPPING]
 
-  Rename files either numbered and create mapping file or use mapping file to
-  restore original names.
-
-  MAPPING file defaults to mapping.txt, only used in ORIGINAL mode.
-
-Options:
-  -h, --help                      Show this message and exit.
-  -m, --mode [numbered|original]  numbered: rename files with numbers,
-                                  original: rename files with original names.
-                                  [required]
-  -r, --regex TEXT                Input filename regular expression (example:
-                                  *.orig.png).  [default: *]
-  -f, --file                      Outputs only mapping.txt file without
-                                  rename.
+### pagestats (not implemented)
+Analyse PageXML files and output a CSV file with the results.<br>
+Possible statistics:
+- regions: region types and their count in each file
+- lines: number of textlines in each file
+```bash
+python3 HTRtools pagestats -h
 ```
-#### suffixedit
-```
-Usage: HTRtools suffixedit [OPTIONS] DIRECTORY OLD_SUFFIX NEW_SUFFIX
 
-Options:
-  -h, --help            Show this message and exit.
-  -b, --blacklist TEXT  Blacklist suffixes, multiple items are allowed.
-  -r, --recursive       Walk through subdirectories recursively.
-```
-#### filenamecut
-```
-Usage: filenamecut [OPTIONS] DIRECTORY CUT_LENGTH
-
-  Cuts first CUT_LENGTH characters from filenames.
-
-Options:
-  -h, --help        Show this message and exit.
-  -r, --regex TEXT  Input filename regular expression (example: *.orig.png).
-                    [default: *]
-```
+## ZPD
+Developed at Centre for [Philology and Digitality](https://www.uni-wuerzburg.de/en/zpd/) (ZPD), [University of Würzburg](https://www.uni-wuerzburg.de/en/).

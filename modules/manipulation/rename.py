@@ -85,6 +85,9 @@ def mapping(files: Path, m: Path):
     nargs=-1
 )
 def rename_cli(files, option: str, regex: str, arguments: tuple):
+    """
+    Rename a set of files by specified rules.
+    """
     fp = sorted(list([f for f in Path(files).glob(regex) if f.is_file()]))
     arg_count = len(arguments)
     match option:

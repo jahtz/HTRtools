@@ -8,7 +8,7 @@ from modules import (coco2page_cli, img2img_cli, pdf2img_cli, csv2txt_cli,
 @click.group()
 @click.help_option("--help", "-h")
 @click.version_option(
-    "2.0",
+    "3.0",
     "-v", "--version",
     prog_name="HTRtools",
     message="%(prog)s v%(version)s - Developed at Centre for Philology and Digitality (ZPD), University of Würzburg"

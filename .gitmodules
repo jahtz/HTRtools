@@ -1,3 +1,3 @@
 [submodule "pagexml"]
 	path = pagexml
-	url = https://github.com/jatzelberger/pagexml.git
+	url = https://github.com/jatzelberger/pagexml/tree/4d4d84a05084198554d1c71a31c81b516e19a0c9

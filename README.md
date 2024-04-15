@@ -1,7 +1,7 @@
 # Documentation
 ## Installation
 ```bash
-git pull https://github.com/jatzelberger/htrtools.git
+git clone https://github.com/jatzelberger/htrtools.git
 pip3 install -r HTRtools/requirements.txt
 ```
 

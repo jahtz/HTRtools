@@ -2,7 +2,7 @@
 ## Installation
 ### Download repository
 ```bash
-git clone --recurse-submodules https://github.com/jatzelberger/htrtools.git
+git clone --recurse-submodules https://github.com/jahtz/htrtools.git
 ```
 
 ### Install requirements

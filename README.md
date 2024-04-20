@@ -2,14 +2,9 @@
 ## Installation
 ### Download repository
 ```bash
-git clone https://github.com/jatzelberger/htrtools.git
+git clone --recurse-submodules https://github.com/jatzelberger/htrtools.git
 ```
-### Download submodules
-```bash
-cd HTRtools/
-git submodule update --init --recursive
-cd ..
-```
+
 ### Install requirements
 ```bash
 pip3 install -r HTRtools/requirements.txt

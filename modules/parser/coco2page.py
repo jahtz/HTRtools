@@ -61,8 +61,8 @@ def coco2page(coco_fp: Path, out_dir: Path, mapping: dict, creator: str, dots: b
 
             p = pxml.create_page(**{
                 'imageFilename': file['file'],
-                'width': str(file['width']),
-                'height': str(file['height']), 
+                'imageWidth': str(file['width']),
+                'imageHeight': str(file['height']),
             })
 
             for rid, region in enumerate(file['regions']):

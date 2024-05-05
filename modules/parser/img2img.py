@@ -44,16 +44,18 @@ def img2img(images: Path, out_dir: Path, in_suffix: str, out_suffix: str, height
     required=True
 )
 @click.option(
-    '-i', '--input',
+    '-i', '--input', '_input',
     help='Input file suffix. Ignored if IMAGES points to a file.',
     type=str,
-    required=True
+    required=True,
+    default='.png'
 )
 @click.option(
     '-o', '--output',
     help='Output file suffix.',
     type=str,
-    required=True
+    required=True,
+    default='.png'
 )
 @click.option(
     '-s', '--size',
